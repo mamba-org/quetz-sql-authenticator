@@ -1,6 +1,5 @@
-from passlib.hash import pbkdf2_sha256
-
 import quetz
+from passlib.hash import pbkdf2_sha256
 from quetz.authentication.base import SimpleAuthenticator
 from quetz.database import get_db_manager
 

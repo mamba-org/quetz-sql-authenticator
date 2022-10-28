@@ -1,10 +1,9 @@
 import uuid
 
 import pytest
-from sqlalchemy import event
-
 from quetz.authorization import SERVER_MEMBER, SERVER_OWNER
 from quetz.db_models import Profile, User
+from sqlalchemy import event
 
 pytest_plugins = "quetz.testing.fixtures"
 
@@ -58,7 +57,7 @@ def member_client(client, member_user):
 
 
 def _create_auth_client(client, user):
-    """authenticated client"""
+    """authenticated client."""
     response = client.get(f"/api/dummylogin/{user.username}")
     assert response.status_code == 200
     return client

@@ -1,6 +1,5 @@
-from sqlalchemy import Column, String
-
 from quetz.db_models import Base
+from sqlalchemy import Column, String
 
 
 class Credentials(Base):

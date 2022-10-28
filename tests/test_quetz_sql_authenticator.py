@@ -1,4 +1,5 @@
 from passlib.hash import pbkdf2_sha256
+
 from quetz_sql_authenticator.api import _calculate_hash
 from quetz_sql_authenticator.db_models import Credentials
 

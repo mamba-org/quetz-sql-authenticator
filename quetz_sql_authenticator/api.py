@@ -1,11 +1,12 @@
+from typing import List
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from passlib.hash import pbkdf2_sha256
-from sqlalchemy.exc import IntegrityError
-from sqlalchemy.orm.session import Session
-
 from quetz import authorization
 from quetz.authorization import SERVER_MAINTAINER, SERVER_OWNER
 from quetz.deps import get_db, get_rules
+from sqlalchemy.exc import IntegrityError
+from sqlalchemy.orm.session import Session
 
 from .db_models import Credentials
 
@@ -49,7 +50,7 @@ def _get(
 def _get_all(
     auth: authorization.Rules = Depends(get_rules),
     db: Session = Depends(get_db),
-) -> str:
+) -> List[str]:
     """List all users."""
     auth.assert_server_roles([SERVER_OWNER, SERVER_MAINTAINER])
 
