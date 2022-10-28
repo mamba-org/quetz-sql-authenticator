@@ -1,0 +1,17 @@
+name: quetz_sql_authenticator
+channels:
+  - qc-internal
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python>=3.8
+  - make
+  - numpydoc
+  - pip
+  - pre-commit
+  - pytest>=6  # Adds --import-mode option
+  - pytest-cov
+  - setuptools-scm
+  - sphinx
+  - sphinxcontrib-apidoc
+  - sphinx_rtd_theme

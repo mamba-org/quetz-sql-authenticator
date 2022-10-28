@@ -1,0 +1,13 @@
+channel_alias: https://conda.prod.quantco.cloud/t/${CONDA_API_KEY}/get
+
+channels:
+  - qc-internal
+  - quantco_main
+  - conda-forge
+
+custom_channels:
+  quantco_main: https://${CONDA_CHANNEL_UPLOAD_USER}:${CONDA_CHANNEL_UPLOAD_PASSWORD}@conda.quantco.cloud
+
+custom_multichannels:
+  conda-forge:
+    - https://conda.anaconda.org/conda-forge
