@@ -1,18 +1,18 @@
-from typing import List
 import logging
+from typing import List
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from passlib.hash import pbkdf2_sha256
 from quetz import authorization
 from quetz.authorization import SERVER_MAINTAINER, SERVER_OWNER
 from quetz.deps import get_db, get_rules
-from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm.session import Session
 
 from .db_models import Credentials
 
 router = APIRouter()
-logger = logging.getLogger('quetz')
+logger = logging.getLogger("quetz")
+
 
 def _calculate_hash(value: str) -> str:
     """Calculate hash from value."""
@@ -86,7 +86,7 @@ def _create(
     )
 
     db.add(credentials)
-    _commit_and_tranform_errors(db)
+    db.commit()
     return username
 
 
@@ -109,7 +109,7 @@ def _update(
             detail=f"User {username} not found",
         )
     credentials.password_hash = _calculate_hash(password)
-    _commit_and_tranform_errors(db)
+    db.commit()
     return username
 
 
@@ -131,22 +131,5 @@ def _delete(
             detail=f"User {username} not found",
         )
     db.delete(credentials)
-    _commit_and_tranform_errors(db)
+    db.commit()
     return username
-
-def _commit_and_tranform_errors(db):
-    """Commit changes to the database and transform errors to HTTP status codes."""
-    try:
-        db.commit()
-    except Exception as e:
-        logger.error(f"""
-        quetz-sql-authenticator encountered the following error \
-        while trying to commit changes to the database:
-        {e}
-        """)
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"""
-            An internal error occured.
-            """,
-        )
