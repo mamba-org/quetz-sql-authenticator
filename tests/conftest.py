@@ -10,7 +10,7 @@ pytest_plugins = "quetz.testing.fixtures"
 
 @pytest.fixture
 def plugins():
-    return ["quetz-sql-authenticator"]
+    return ["quetz_sql_authenticator"]
 
 
 @pytest.fixture
