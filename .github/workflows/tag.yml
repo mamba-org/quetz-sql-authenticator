@@ -22,7 +22,7 @@ jobs:
       - name: Pull image
         run: docker pull ghcr.io/quantco/qc-mambaforge-base:latest
       - name: Checkout branch
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v3.1.0
         with:
           ref: ${{ github.head_ref }}
       - name: Fetch tags
@@ -30,7 +30,7 @@ jobs:
       - name: Fetch all
         run: git fetch --prune --unshallow
       - name: Checkout github-actions repo
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v3.1.0
         with:
           repository: Quantco/github-actions
           ref: main
@@ -59,7 +59,7 @@ jobs:
       - name: Pull image
         run: docker pull ghcr.io/quantco/qc-mambaforge-base:latest
       - name: Checkout branch
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v3.1.0
         with:
           ref: ${{ github.head_ref }}
       - name: Fetch tags
@@ -67,7 +67,7 @@ jobs:
       - name: Fetch all
         run: git fetch --prune --unshallow
       - name: Checkout github-actions repo
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v3.1.0
         with:
           repository: Quantco/github-actions
           ref: main

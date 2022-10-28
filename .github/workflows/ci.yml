@@ -26,7 +26,7 @@ jobs:
         PYTHON_VERSION: ['3.8', '3.9', '3.10']
     steps:
       - name: Checkout branch
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v3.1.0
         with:
           ref: ${{ github.head_ref }}
       - name: Fetch full git history
@@ -43,7 +43,7 @@ jobs:
       - name: Install repository
         run: python -m pip install --no-build-isolation --no-deps --disable-pip-version-check -e .
       - name: Checkout Quantco/pytest-action
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.1.0
         with:
           repository: Quantco/pytest-action
           ref: v2
@@ -69,16 +69,16 @@ jobs:
         run: docker pull ghcr.io/quantco/qc-mambaforge-base:latest
       - name: Checkout branch
         if: ${{ github.event_name != 'pull_request' }}
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v3.1.0
       - name: Checkout plain HEAD commit
         if: ${{ github.event_name == 'pull_request' }}
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v3.1.0
         with:
           ref: ${{ github.event.pull_request.head.sha }}
       - name: Fetch full git history
         run: git fetch --prune --unshallow
       - name: Checkout github-actions repo
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v3.1.0
         with:
           repository: Quantco/github-actions
           ref: main
@@ -111,7 +111,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout branch
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v3.1.0
         with:
           ref: ${{ github.head_ref }}
       - name: Install Python 3.8
@@ -135,13 +135,13 @@ jobs:
       - name: Pull image
         run: docker pull ghcr.io/quantco/qc-mambaforge-base:latest
       - name: Checkout branch
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v3.1.0
         with:
           ref: ${{ github.head_ref }}
       - name: Fetch full git history
         run: git fetch --prune --unshallow
       - name: Checkout github-actions repo
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v3.1.0
         with:
           repository: Quantco/github-actions
           ref: main
