@@ -5,7 +5,7 @@ An authenticator that stores credentials in the Quetz SQL database using passlib
 ### Installation
 
 ```
-quetz plugin install plugins/quetz_sql_authenticator
+mamba install -c qc-internal quetz_sql_authenticator
 ```
 
 ### Usage
