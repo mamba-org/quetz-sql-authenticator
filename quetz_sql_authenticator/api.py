@@ -1,4 +1,3 @@
-import logging
 from typing import List
 
 from fastapi import APIRouter, Depends, HTTPException, status
@@ -11,7 +10,6 @@ from sqlalchemy.orm.session import Session
 from .db_models import Credentials
 
 router = APIRouter()
-logger = logging.getLogger("quetz")
 
 
 def _calculate_hash(value: str) -> str:
