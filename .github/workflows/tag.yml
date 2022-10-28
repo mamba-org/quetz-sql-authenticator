@@ -22,7 +22,7 @@ jobs:
       - name: Pull image
         run: docker pull ghcr.io/quantco/qc-mambaforge-base:latest
       - name: Checkout branch
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v3.1.0
         with:
           ref: ${{ github.head_ref }}
       - name: Fetch tags
@@ -30,7 +30,7 @@ jobs:
       - name: Fetch all
         run: git fetch --prune --unshallow
       - name: Checkout github-actions repo
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v3.1.0
         with:
           repository: Quantco/github-actions
           ref: main
@@ -59,7 +59,7 @@ jobs:
       - name: Pull image
         run: docker pull ghcr.io/quantco/qc-mambaforge-base:latest
       - name: Checkout branch
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v3.1.0
         with:
           ref: ${{ github.head_ref }}
       - name: Fetch tags
@@ -67,13 +67,13 @@ jobs:
       - name: Fetch all
         run: git fetch --prune --unshallow
       - name: Checkout github-actions repo
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v3.1.0
         with:
           repository: Quantco/github-actions
           ref: main
           token: ${{ secrets.FQ_GH_TOKEN }}
           path: .github/quantco-actions
-      - uses: google-github-actions/setup-gcloud@v0.6.0
+      - uses: google-github-actions/setup-gcloud@v0.6.2
         with:
           version: '354.0.0'
           project_id: ${{ secrets.GCP_UPLOAD_PROJECT_ID }}
