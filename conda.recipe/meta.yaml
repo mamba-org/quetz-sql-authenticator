@@ -20,10 +20,18 @@ requirements:
     - setuptools-scm
   run:
     - python >=3.8
+    - quetz =0.4.4
+    - sqlalchemy
+    - fastapi
+    - alembic
+    - passlib
 
 test:
   requires:
     - pip
+    - pytest>=6
+    - pytest-cov
+    - pytest-mock
   commands:
     - pip check
   imports:

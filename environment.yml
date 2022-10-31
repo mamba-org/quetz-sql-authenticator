@@ -15,4 +15,9 @@ dependencies:
   - sphinx
   - sphinxcontrib-apidoc
   - sphinx_rtd_theme
+ # Runtime dependencies
   - quetz=0.4.4
+  - sqlalchemy
+  - fastapi
+  - alembic
+  - passlib
