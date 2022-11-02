@@ -75,7 +75,7 @@ jobs:
           path: .github/quantco-actions
       - uses: google-github-actions/setup-gcloud@v0.6.2
         with:
-          version: '354.0.0'
+          version: '408.0.0'
           project_id: ${{ secrets.GCP_UPLOAD_PROJECT_ID }}
           service_account_email: ${{ secrets.GCP_UPLOAD_SA_EMAIL }}
           service_account_key: ${{ secrets.GCP_UPLOAD_SA_KEY }}
