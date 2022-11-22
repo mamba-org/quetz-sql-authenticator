@@ -1,0 +1,24 @@
+name: quetz_sql_authenticator
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python>=3.8
+  - make
+  - numpydoc
+  - pip
+  - pre-commit
+  - pytest>=6  # Adds --import-mode option
+  - pytest-cov
+  - pytest-mock
+  - setuptools-scm
+  - sphinx
+  - sphinxcontrib-apidoc
+  - sphinx_rtd_theme
+ # Runtime dependencies
+  - quetz>=0.4.4
+  - sqlalchemy
+  - fastapi
+  - alembic
+  - passlib
+  - starlette<0.21.0

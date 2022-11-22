@@ -1,0 +1,55 @@
+name: CI
+on: [push]
+
+# Automatically stop old builds on the same branch/PR
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash -el {0}
+
+env:
+  CONDA_CHANNEL_UPLOAD_USER: ${{ secrets.CONDA_CHANNEL_UPLOAD_USER }}
+  CONDA_CHANNEL_UPLOAD_PASSWORD: ${{ secrets.CONDA_CHANNEL_UPLOAD_PASSWORD }}
+  CONDA_API_KEY: ${{ secrets.QUETZ_API_KEY }}
+
+jobs:
+  linux-unittests:
+    name: "Linux - unit tests - Python ${{ matrix.PYTHON_VERSION }}"
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        PYTHON_VERSION: ['3.8', '3.9', '3.10']
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3.1.0
+        with:
+          ref: ${{ github.head_ref }}
+      - name: Fetch full git history
+        run: git fetch --prune --unshallow
+      - name: Set up Conda env
+        uses: mamba-org/provision-with-micromamba@f347426e5745fe3dfc13ec5baf20496990d0281f
+        with:
+          condarc-file: .github/workflows/.condarc
+          cache-env: true
+          extra-specs: |
+            python=${{ matrix.PYTHON_VERSION }}
+            pytest-md
+            pytest-emoji
+      - name: Install repository
+        run: python -m pip install --no-build-isolation --no-deps --disable-pip-version-check -e .
+      - name: Run pytest
+        uses: pavelzw/pytest-action@v2
+        with:
+          verbose: true
+          emoji: true
+          job-summary: true
+          custom-arguments: --cov="quetz_sql_authenticator" --cov-report=xml ./tests
+          click-to-expand: true
+          report-title: "Unit tests Linux - Python ${{ matrix.PYTHON_VERSION }}"
+
+# TODO: Add conda build & docs generation

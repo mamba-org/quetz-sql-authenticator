@@ -1,0 +1,7 @@
+name: Deploy on tag
+on:
+  push:
+    tags:
+      - '*'
+
+# TODO ADD deployment and docs?
