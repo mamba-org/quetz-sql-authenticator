@@ -79,6 +79,7 @@ jobs:
           path: dist
 
   upload_pypi:
+    name: Upload to PyPI
     needs: [build]
     runs-on: ubuntu-latest
     steps:
