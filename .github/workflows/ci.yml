@@ -53,15 +53,57 @@ jobs:
       - name: Run pre-commit checks
         uses: pre-commit/action@v3.0.0
 
-  release-pypi:
-    name: Release to PyPI
+  # PyPI release steps stolen from
+  # https://github.com/Quantco/glum/blob/a405fd73bdb959f533358027201ebb641a60f700/.github/workflows/build_wheels.yml
+
+  build_wheels:
+    name: Build wheels
     if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
     needs: [pytest, pre-commit]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Publish package
-        uses: pypa/gh-action-pypi-publish@v1.6.4
+
+      - name: Build wheels
+        uses: pypa/cibuildwheel@v2.12.0
+
+      - uses: actions/upload-artifact@v3
+        with:
+          path: ./wheelhouse/*.whl
+
+  build_sdist:
+    name: Build source distribution
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
+    needs: [pytest, pre-commit]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v4
+        name: Install Python
+        with:
+          python-version: '3.11'
+
+      - name: Install build dependencies
+        run: python -m pip install setuptools setuptools-scm wheel
+      - name: Build sdist
+        run: python setup.py sdist
+
+      - uses: actions/upload-artifact@v3
+        with:
+          path: dist/*.tar.gz
+
+
+  upload_pypi:
+    needs: [build_wheels, build_sdist]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: artifact
+          path: dist
+
+      - uses: pypa/gh-action-pypi-publish@v1.6.4
         with:
           user: __token__
-          password: ${{ secrets.pypi_password }}
+          password: ${{ secrets.GH_PYPI_UPLOAD }}
