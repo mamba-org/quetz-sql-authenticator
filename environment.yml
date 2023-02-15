@@ -1,4 +1,4 @@
-name: quetz_sql_authenticator
+name: quetz-sql-authenticator
 channels:
   - conda-forge
   - nodefaults

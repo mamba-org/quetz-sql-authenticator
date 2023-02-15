@@ -13,7 +13,7 @@ pip install -e .
 Once uploaded to conda-forge:
 
 ```
-mamba install -c conda-forge quetz_sql_authenticator
+mamba install -c conda-forge quetz-sql-authenticator
 ```
 
 ### Usage
